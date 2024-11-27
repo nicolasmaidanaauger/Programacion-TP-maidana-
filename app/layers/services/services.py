@@ -2,18 +2,20 @@
 
 from ..persistence import repositories
 from ..utilities import translator
+from ..transport import transport # Importe transport de la carpeta transport para cargar el listado de datos de la API
 from django.contrib.auth import get_user
 
 def getAllImages(input=None):
     # obtiene un listado de datos "crudos" desde la API, usando a transport.py.
-    json_collection = []
+    json_collection = transport.getAllImages(input)
 
     # recorre cada dato crudo de la colección anterior, lo convierte en una Card y lo agrega a images.
     images = []
     # Ciclo for para recorrer json_collection, si encuentra 'image' se suma el valor (url) a images, maidana
-    for obj in json_collection:
-        if 'image' in obj:
-            images.append(obj['image'])
+    for object in json_collection:
+        if 'image' in object:
+            card = translator.fromRequestIntoCard(object) # Llame la funcion fromRequestIntoCard, maidana
+            images.append(card)
     return images
 
 # añadir favoritos (usado desde el template 'home.html')
