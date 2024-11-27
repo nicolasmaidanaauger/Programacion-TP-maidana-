@@ -10,7 +10,10 @@ def getAllImages(input=None):
 
     # recorre cada dato crudo de la colección anterior, lo convierte en una Card y lo agrega a images.
     images = []
-
+    # Ciclo for para recorrer json_collection, si encuentra 'image' se suma el valor (url) a images, maidana
+    for obj in json_collection:
+        if 'image' in obj:
+            images.append(obj['image'])
     return images
 
 # añadir favoritos (usado desde el template 'home.html')
