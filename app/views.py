@@ -44,13 +44,9 @@ def deleteFavourite(request):
 
 @login_required
 def exit(request):
-    pass
+    logout(request) #funcion logout de django.contrib.auth
+    return redirect('/') #redirecciona a pagina de inicio
 
 #easter egg de prueba, maidana
 def easterEgg(request):
     return HttpResponse("Esto es un easter egg, congrats")
-
-@login_required 
-def logout_view(request):
-    logout(request) #funcion logout de django.contrib.auth
-    return redirect('/') #redirecciona a pagina de inicio
